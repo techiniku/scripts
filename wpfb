@@ -1,0 +1,2 @@
+#!/bin/bash
+/bin/tar czf wp-files.tar.gz www
