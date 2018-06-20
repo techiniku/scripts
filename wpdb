@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/mysqldump --add-drop-table -u USER -p DATABASE > wpdb.sql
