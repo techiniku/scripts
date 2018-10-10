@@ -1,2 +1,14 @@
-#!/bin/bash
-/usr/bin/mysqldump --add-drop-table -u USER -p DATABASE > wpdb.sql
+#!/bin/sh
+# wpdb - WordPress Database Backup
+# Supports: macOS, Linux
+
+# Settings
+user=$USER
+db=$USER
+backup_to=$HOME"/backups/"
+
+# Backup
+date=`date "+%Y-%m-%d"`
+time=`date "+%H-%M-%S"`
+backup_file=$backup_to$USER"_"$date"_"$time"_wp_db.sql"
+`which mysqldump` --add-drop-table -u "$user" -p "$db" > "$backup_file"

@@ -1,2 +1,40 @@
-#!/bin/bash
-/bin/tar czf wp-files.tar.gz www
+#!/bin/sh
+# wpfb - WordPress File Backup
+# Supports: macOS, Linux
+
+# WordPress Directory
+backup=$HOME"/www"
+backup_to=$HOME"/backups/"
+
+# Things to exclude from backup
+exclusion="
+._.DS_Store
+.DS_Store
+wp-content/updraft
+"
+
+# Split exclusion string on newlines only
+oIFS=$IFS
+IFS="
+"
+
+# Where to save backup file
+date=`date "+%Y-%m-%d"`
+time=`date "+%H-%M-%S"`
+backup_file=$backup_to$USER"_"$date"_"$time"_wp_files.tar.gz"
+
+# Set up backup command and exclusions
+dir_path=`dirname $backup`
+dir=`basename $backup`
+
+echo "\n"Exclusions are
+set tar 
+for i in $exclusion
+do
+  echo $i
+  set "$@" --exclude="$i"
+done
+set "$@" -czf "$backup_file"
+set "$@" -C "$dir_path" "$dir"
+"$@"
+echo "\n"Backup complete
